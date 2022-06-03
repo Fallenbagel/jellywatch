@@ -74,9 +74,14 @@ export default function DashboardPage({
           const avatar = element.UserPrimaryImageTag ? `${url}/Users/${userId}/Images/Primary/?tag=${element.UserPrimaryImageTag}&quality=90` : "/user-icon-192x192.png";
           const stream = element.TranscodingInfo ? "Transcode" : "Direct Play"
           const audio = element.TranscodingInfo ? `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Audio"))?.Codec} -> ${element.TranscodingInfo.AudioCodec})` : `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Audio"))?.Codec})`
-          const video = element.TranscodingInfo ? `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.Codec} -> ${element.TranscodingInfo.VideoCodec})` : `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === " Video"))?.Codec})`
+          const video = element.TranscodingInfo ? `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.Codec} -> ${element.TranscodingInfo.VideoCodec})` : `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.Codec})`
           const progress = element.PlayState.PositionTicks ? element.PlayState.PositionTicks / element.NowPlayingItem.RunTimeTicks * 100 : 0
           const playState = element.PlayState.IsPaused ? "Paused" : "Playing"
+          const bitrate_full = element.TranscodingInfo ? element.TranscodingInfo.Bitrate : (element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.BitRate
+          // check if bitrate is Kbps or Mbps if it is Kbps set it to Kbps if its Mbps set it to Mbps
+          let bitrate = ""
+          if (bitrate_full && bitrate_full > 1000000 ) bitrate = `${(bitrate_full / 1000000).toFixed(2)} Mbps`
+          if (bitrate_full && bitrate_full < 1000000 ) bitrate = `${(bitrate_full / 1000).toFixed(2)} Kbps`
 
           // UI logic
           const moviePosterClass = "h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
@@ -118,6 +123,7 @@ export default function DashboardPage({
                       <li>AUDIO {audio}</li>
                       <li>VIDEO {video}</li>
                       <br />
+                      <li>BANDWIDTH {bitrate}</li>
                       <li>LOCATION {element.RemoteEndPoint}</li>
 
                     </ul>
