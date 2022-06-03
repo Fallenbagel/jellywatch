@@ -15,6 +15,7 @@ export type Root = {
   FullNowPlayingItem?: FullNowPlayingItem;
   DeviceId: string;
   ApplicationVersion: string;
+  TranscodingInfo?: TranscodingInfo;
   IsActive: boolean;
   SupportsMediaControl: boolean;
   SupportsRemoteControl: boolean;
@@ -190,6 +191,21 @@ export interface FullNowPlayingItem {
   DateLastSaved: string;
   RemoteTrailers: RemoteTrailer[];
   SupportsExternalTransfer: boolean;
+}
+
+export interface TranscodingInfo {
+  AudioCodec: string;
+  VideoCodec: string;
+  Container: string;
+  IsVideoDirect: boolean;
+  IsAudioDirect: boolean;
+  Bitrate: number;
+  Framerate: number;
+  CompletionPercentage: number;
+  Width: number;
+  Height: number;
+  AudioChannels: number;
+  TranscodeReasons: string[];
 }
 
 export interface RemoteTrailer {
