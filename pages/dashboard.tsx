@@ -23,7 +23,10 @@ export default function DashboardPage({
       router.push("/");
     }
 
-    fetchData();
+    // call a function evry 5 seconds
+    const interval = setInterval(() => {
+      fetchData();
+    }, 5000);
   }, [router]);
 
   function fetchData() {
@@ -67,11 +70,11 @@ export default function DashboardPage({
           }
           const userId = element.UserId;
           const url = Cookies.get("URL")
-          const itemId= element.NowPlayingItem.Id
+          const itemId= element.NowPlayingItem.Type === "Movie" ? element.NowPlayingItem.Id : element.NowPlayingItem.SeriesId;
           const avatar = element.UserPrimaryImageTag ? `${url}/Users/${userId}/Images/Primary/?tag=${element.UserPrimaryImageTag}&quality=90` : "/user-icon-192x192.png";
           const stream = element.TranscodingInfo ? "Transcode" : "Direct Play"
           const audio = element.TranscodingInfo ? `${stream} (${element.NowPlayingItem.MediaStreams[1].Codec} -> ${element.TranscodingInfo.AudioCodec})` : `${stream} (${element.NowPlayingItem.MediaStreams[1].Codec})`
-          const video = element.TranscodingInfo ? `${stream} (${element.NowPlayingItem.MediaStreams[0].Codec} -> ${element.TranscodingInfo.AudioCodec})` : `${stream} (${element.NowPlayingItem.MediaStreams[0].Codec})`
+          const video = element.TranscodingInfo ? `${stream} (${element.NowPlayingItem.MediaStreams[0].Codec} -> ${element.TranscodingInfo.VideoCodec})` : `${stream} (${element.NowPlayingItem.MediaStreams[0].Codec})`
           const progress = element.PlayState.PositionTicks ? element.PlayState.PositionTicks / element.NowPlayingItem.RunTimeTicks * 100 : 0
           const playState = element.PlayState.IsPaused ? "Paused" : "Playing"
 
