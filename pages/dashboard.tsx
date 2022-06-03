@@ -79,6 +79,29 @@ export default function DashboardPage({
           const transcodingProgress = element.TranscodingInfo ? Math.floor(element.TranscodingInfo.CompletionPercentage) : -1
           const playState = element.PlayState.IsPaused ? "Paused" : "Playing"
           const bitrate_full = element.TranscodingInfo ? element.TranscodingInfo.Bitrate : (element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.BitRate
+          let product = ""
+          if ((element.DeviceName == "Chrome") && (element.Client == "Jellyfin Web")){
+            product = "/chrome.svg"
+          }
+          else if ((element.DeviceName == "Edge Chromium") && (element.Client == "Jellyfin Web")){
+            product = "/msedge.svg"
+          }
+          else if ((element.DeviceName == "Firefox") && (element.Client == "Jellyfin Web")){
+            product = "/firefox.svg"
+          }
+          else if ((element.Client == "Jellyfin Android") || (element.Client == "Android TV")){
+            product = "/android.svg"
+          }
+          else if (element.Client == "Jellyfin iOS"){
+            product = "/ios.svg"
+          }
+          else if (element.DeviceName == "Samsung Smart TV"){
+            product = "/samsung.svg"
+          }
+          else {
+            product = "/JellyfinDesktop.svg"
+          }
+          /* element.DeviceName == "Chrome" ? product = "/chrome.svg" : product = "/JellyfinDesktop.svg"; */
           // check if bitrate is Kbps or Mbps if it is Kbps set it to Kbps if its Mbps set it to Mbps
           let bitrate = ""
           if (bitrate_full && bitrate_full > 1000000 ) bitrate = `${(bitrate_full / 1000000).toFixed(2)} Mbps`
@@ -114,8 +137,11 @@ export default function DashboardPage({
                 router.push(`user/${element.UserId}`);
               }}
             >
-              <div className="relative max-w-sm w-full lg:max-w-full lg:flex backdrop-blur-xl bg-white">
+              <div className="relative max-w-sm w-full lg:max-w-full lg:flex backdrop-blur-xl bg-slate-500">
                 <div className={moviePosterClass} style={moviePosterStyle} title={moviePosterTitle}></div>
+                <div className="absolute left-90 right-0 top-2">
+                    <img className="w-12 h-12 mr-4" src={product}/>
+                  </div>
                 <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                   <div className="mb-8">
                     <ul className="list-none text-black text-right">
