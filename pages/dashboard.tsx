@@ -75,7 +75,8 @@ export default function DashboardPage({
           const stream = element.TranscodingInfo ? "Transcode" : "Direct Play"
           const audio = element.TranscodingInfo ? `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Audio"))?.Codec} -> ${element.TranscodingInfo.AudioCodec})` : `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Audio"))?.Codec})`
           const video = element.TranscodingInfo ? `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.Codec} -> ${element.TranscodingInfo.VideoCodec})` : `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.Codec})`
-          const progress = element.PlayState.PositionTicks ? element.PlayState.PositionTicks / element.NowPlayingItem.RunTimeTicks * 100 : 0
+          const playbackProgress = element.PlayState.PositionTicks ? element.PlayState.PositionTicks / element.NowPlayingItem.RunTimeTicks * 100 : 0
+          const transcodingProgress = element.TranscodingInfo ? Math.floor(element.TranscodingInfo.CompletionPercentage) : -1
           const playState = element.PlayState.IsPaused ? "Paused" : "Playing"
           const bitrate_full = element.TranscodingInfo ? element.TranscodingInfo.Bitrate : (element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.BitRate
           // check if bitrate is Kbps or Mbps if it is Kbps set it to Kbps if its Mbps set it to Mbps
@@ -97,8 +98,12 @@ export default function DashboardPage({
             backgroundSize: "cover",
           }
           const moviePosterTitle = element.NowPlayingItem.Name
-          const test = {
-            width: `${progress}%`,
+          const playbackProgressStyle = {
+            width: `${playbackProgress}%`,
+          }
+
+          const transcodingProgressStyle = {
+            width: `${transcodingProgress}%`,
           }
 
           // HTML + parsing data
@@ -139,10 +144,12 @@ export default function DashboardPage({
                 <div className="absolute bottom-0 left-0 min-w-full">
                   <div className="flex justify-between mb-1">
                     <span className="text-base font-medium text-blue-700 dark:text-white">{playState}</span>
-                    <span className="text-sm font-medium text-blue-700 text-black">{Math.floor(progress)} %</span>
+                    <span className="text-sm font-medium text-blue-700 text-black">{Math.floor(playbackProgress)} %</span>
                   </div>
-                  <div className="w-full bg-gray-200 h-2.5 dark:bg-gray-700">
-                    <div className="bg-blue-600 h-2.5" style={test}></div>
+                  <div className="w-full bg-gray-200 h-2.5 dark:bg-gray-700 relative">
+                    <div className="bg-blue-600 h-2.5 bottom-0 left-0 z-10 absolute" style={playbackProgressStyle}></div>
+                    {transcodingProgress > 0 &&
+                      <div className="bg-orange-600 h-2.5 absolute bottom-0 left-0 z-0 absolute" style={transcodingProgressStyle}></div>}
                   </div>
                 </div>
               </div>
