@@ -73,8 +73,8 @@ export default function DashboardPage({
           const itemId= element.NowPlayingItem.Type === "Movie" ? element.NowPlayingItem.Id : element.NowPlayingItem.SeriesId;
           const avatar = element.UserPrimaryImageTag ? `${url}/Users/${userId}/Images/Primary/?tag=${element.UserPrimaryImageTag}&quality=90` : "/user-icon-192x192.png";
           const stream = element.TranscodingInfo ? "Transcode" : "Direct Play"
-          const audio = element.TranscodingInfo ? `${stream} (${element.NowPlayingItem.MediaStreams[1].Codec} -> ${element.TranscodingInfo.AudioCodec})` : `${stream} (${element.NowPlayingItem.MediaStreams[1].Codec})`
-          const video = element.TranscodingInfo ? `${stream} (${element.NowPlayingItem.MediaStreams[0].Codec} -> ${element.TranscodingInfo.VideoCodec})` : `${stream} (${element.NowPlayingItem.MediaStreams[0].Codec})`
+          const audio = element.TranscodingInfo ? `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Audio"))?.Codec} -> ${element.TranscodingInfo.AudioCodec})` : `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Audio"))?.Codec})`
+          const video = element.TranscodingInfo ? `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.Codec} -> ${element.TranscodingInfo.VideoCodec})` : `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === " Video"))?.Codec})`
           const progress = element.PlayState.PositionTicks ? element.PlayState.PositionTicks / element.NowPlayingItem.RunTimeTicks * 100 : 0
           const playState = element.PlayState.IsPaused ? "Paused" : "Playing"
 
@@ -112,7 +112,7 @@ export default function DashboardPage({
                       <li>PRODUCT {element.Client}</li>
                       <li>PLAYER {element.DeviceName}</li>
                       <li>CLIENT {element.ApplicationVersion}</li>
-                      <li>QUALITY {element.NowPlayingItem.Width}x{element.NowPlayingItem.Height}</li>
+                      <li>QUALITY {(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.DisplayTitle}</li>
                       <br />
                       <li>STREAM {stream}</li>
                       <li>AUDIO {audio}</li>
@@ -140,19 +140,6 @@ export default function DashboardPage({
                   </div>
                 </div>
               </div>
-
-              {/*<div className="bg-gray-600 text-gray-200 p-4">
-                <div>
-                  <img src={`${url}/Users/${userId}/Images/Primary`}></img>
-                  <p>User: {element.UserName}</p>
-                  <p>Client: {element.Client}</p>
-                  <p>Version: {element.ApplicationVersion}</p>
-                  <p>Stream: {element.PlayState.PlayMethod}</p>
-                  <p>Container: {element.NowPlayingItem.Container}</p>
-                  <p>Location: {element.RemoteEndPoint}</p>
-                  <img src={`${url}/Items/${itemId}/Images/Backdrop/0?tag=${itemId}`}></img>
-                 </div>
-              </div>*/}
             </button>
           );
         })}
