@@ -1,6 +1,6 @@
 # <p align="center">JELLYWATCH</p>
 
-Jellywatch is a web application for monitoring*, analytics** and notifications** inspired by tautulli for Jellyfin/Emby Media Server.
+Jellywatch is a javascript web application for monitoring*, analytics** and notifications** inspired by tautulli for Jellyfin/Emby Media Server.
 
 <sub><sup> 
   * Active Streams
