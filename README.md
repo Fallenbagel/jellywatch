@@ -2,10 +2,9 @@
 
 Jellywatch is a javascript web application for monitoring*, analytics** and notifications** inspired by tautulli for Jellyfin/Emby Media Server.
 
-<sub><sup> 
-  * Active Streams
-  ** Work in Progress 
-</sup></sub>
+<sub><sup> * Active Streams </sup></sub>
+
+<sub><sup> ** Work in Progress </sup></sub>
 
 ## Pre-requisites
 
