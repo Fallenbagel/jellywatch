@@ -72,7 +72,7 @@ export default function DashboardPage({
           const url = Cookies.get("URL")
           const itemId = element.NowPlayingItem.Type === "Episode" ? element.NowPlayingItem.SeriesId : element.NowPlayingItem.Id;
           const isTvChannel = element.NowPlayingItem.Type === "TvChannel" ? true : false;
-          const avatar = element.UserPrimaryImageTag ? `${url}/Users/${userId}/Images/Primary/?tag=${element.UserPrimaryImageTag}&quality=90` : "/user-icon-192x192.png";
+          const avatar = element.UserPrimaryImageTag ? `${url}/Users/${userId}/Images/Primary/?tag=${element.UserPrimaryImageTag}&quality=90` : "/avatar.png";
           const stream = element.TranscodingInfo ? "Transcode" : "Direct Play"
           const audio = element.TranscodingInfo ? `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Audio"))?.Codec} -> ${element.TranscodingInfo.AudioCodec})` : `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Audio"))?.Codec})`
           const video = element.TranscodingInfo ? `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.Codec} -> ${element.TranscodingInfo.VideoCodec})` : `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.Codec})`
@@ -84,39 +84,54 @@ export default function DashboardPage({
           let deviceImage = null
           let deviceColour = null
           // Chrome
-          if ((element.DeviceName == "Chrome") && (element.Client == "Jellyfin Web")) {
-            deviceImage = "/chrome.svg"
+          if ((element.DeviceName?.includes("Chrome")) && (element.Client == "Jellyfin Web")) {
+            deviceImage = `${url}/web/assets/img/devices/chrome.svg`
             deviceColour = "bg-gradient-to-br from-[#DD5144] to-[#991e13]"
           }
           // Edge
-          else if ((element.DeviceName == "Edge Chromium") && (element.Client == "Jellyfin Web")) {
-            deviceImage = "/msedge.svg"
+          else if ((element.DeviceName?.includes("Edge")) && (element.Client == "Jellyfin Web")) {
+            deviceImage = `${url}/web/assets/img/devices/edgechromium.svg`
             deviceColour = "bg-gradient-to-br from-[#36c752] to-[#0882D8]"
           }
           // Opera
           else if ((element.DeviceName == "Opera") && (element.Client == "Jellyfin Web")) {
-            deviceImage = "/opera.svg"
+            deviceImage = `${url}/web/assets/img/devices/opera.svg`
             deviceColour = "bg-gradient-to-br from-[#FF1B2D] to-[#A70014]"
+          }
+          // Safari
+          else if ((element.DeviceName?.includes("Safari")) && (element.Client == "Jellyfin Web")) {
+            deviceImage = `${url}/web/assets/img/devices/safari.svg`
+            deviceColour = "bg-gradient-to-br from-[#19D1FF] to-[#1853b2]"
           }
           // Firefox
           else if ((element.DeviceName == "Firefox") && (element.Client == "Jellyfin Web")) {
-            deviceImage = "/firefox.svg"
+            deviceImage = `${url}/web/assets/img/devices/firefox.svg`
             deviceColour = "bg-gradient-to-br from-[#FF7F0C] to-[#D90B57]"
           }
           // Android TV
-          else if ((element.Client == "Jellyfin Android") || (element.Client == "Android TV")) {
-            deviceImage = "/android.svg"
+          else if ((element.Client.includes("Android"))) {
+            deviceImage = `${url}/web/assets/img/devices/android.svg`
             deviceColour = "bg-gradient-to-br from-[#B3E52A] to-[#4c7f11]"
           }
           // Apple iOS
           else if (element.Client == "Jellyfin Mobile (iOS)") {
-            deviceImage = "/ios.svg"
+            deviceImage = `${url}/web/assets/img/devices/apple.svg`
             deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
           }
           // Samsung TV
-          else if (element.DeviceName == "Samsung Smart TV") {
-            deviceImage = "/samsung.svg"
+          else if (element.DeviceName == "Samsung Smart TV" && (element.Client == "Jellyfin Web")) {
+            deviceImage = `${url}/web/assets/img/devices/samsungtv.svg`
             deviceColour = "bg-gradient-to-br from-[#0193DE] to-[#1528A0]"
+          }
+          // Xbox
+          else if (element.DeviceName?.includes("Xbox")) {
+            deviceImage = `${url}/web/assets/img/devices/xbox.svg`
+            deviceColour = "bg-gradient-to-br from-[#107C10] to-[#033303]"
+          }
+          // Playstation
+          else if (element.DeviceName?.includes("Sony PS")) {
+            deviceImage = `${url}/web/assets/img/devices/playstation.svg`
+            deviceColour = "bg-gradient-to-br from-[#1C6FB5] to-[#052249]"
           }
           // Fallback
           else {
@@ -156,6 +171,7 @@ export default function DashboardPage({
                 router.push(`user/${element.UserId}`);
               }}
             >
+              {element.DeviceName} ~ {element.Client}
               <div style={movieBackdropStyle}>
                 <div className="relative w-full max-w-full flex flex-col sm:flex-row backdrop-blur-sm bg-black/50 pb-5 min-h-[340px]">
                   <img className={moviePosterClass} src={moviePosterImage} alt={moviePosterTitle}/>
