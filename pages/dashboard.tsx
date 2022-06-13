@@ -83,30 +83,42 @@ export default function DashboardPage({
 
           let deviceImage = null
           let deviceColour = null
-          if ((element.DeviceName == "Chrome") && (element.Client == "Jellyfin Web")){
+          // Chrome
+          if ((element.DeviceName == "Chrome") && (element.Client == "Jellyfin Web")) {
             deviceImage = "/chrome.svg"
             deviceColour = "bg-gradient-to-br from-[#DD5144] to-[#991e13]"
           }
-          else if ((element.DeviceName == "Edge Chromium") && (element.Client == "Jellyfin Web")){
+          // Edge
+          else if ((element.DeviceName == "Edge Chromium") && (element.Client == "Jellyfin Web")) {
             deviceImage = "/msedge.svg"
             deviceColour = "bg-gradient-to-br from-[#36c752] to-[#0882D8]"
           }
-          else if ((element.DeviceName == "Firefox") && (element.Client == "Jellyfin Web")){
+          // Opera
+          else if ((element.DeviceName == "Opera") && (element.Client == "Jellyfin Web")) {
+            deviceImage = "/opera.svg"
+            deviceColour = "bg-gradient-to-br from-[#FF1B2D] to-[#A70014]"
+          }
+          // Firefox
+          else if ((element.DeviceName == "Firefox") && (element.Client == "Jellyfin Web")) {
             deviceImage = "/firefox.svg"
             deviceColour = "bg-gradient-to-br from-[#FF7F0C] to-[#D90B57]"
           }
-          else if ((element.Client == "Jellyfin Android") || (element.Client == "Android TV")){
+          // Android TV
+          else if ((element.Client == "Jellyfin Android") || (element.Client == "Android TV")) {
             deviceImage = "/android.svg"
             deviceColour = "bg-gradient-to-br from-[#B3E52A] to-[#4c7f11]"
           }
-          else if (element.Client == "Jellyfin Mobile (iOS)"){
+          // Apple iOS
+          else if (element.Client == "Jellyfin Mobile (iOS)") {
             deviceImage = "/ios.svg"
             deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
           }
-          else if (element.DeviceName == "Samsung Smart TV"){
+          // Samsung TV
+          else if (element.DeviceName == "Samsung Smart TV") {
             deviceImage = "/samsung.svg"
             deviceColour = "bg-gradient-to-br from-[#0193DE] to-[#1528A0]"
           }
+          // Fallback
           else {
             deviceImage = "/JellyfinDesktop.svg"
             deviceColour = "bg-gradient-to-br from-[#AA5CC3] to-[#00A4DC]"
