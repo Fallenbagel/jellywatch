@@ -171,7 +171,6 @@ export default function DashboardPage({
                 router.push(`user/${element.UserId}`);
               }}
             >
-              {element.DeviceName} ~ {element.Client}
               <div style={movieBackdropStyle}>
                 <div className="relative w-full max-w-full flex flex-col sm:flex-row backdrop-blur-sm bg-black/50 pb-5 min-h-[340px]">
                   <img className={moviePosterClass} src={moviePosterImage} alt={moviePosterTitle}/>
