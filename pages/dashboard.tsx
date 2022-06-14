@@ -13,13 +13,9 @@ export default function DashboardPage({
   const router = useRouter();
 
   React.useEffect(() => {
-    const apiKey = Cookies.get("API_KEY");
-    const url = Cookies.get("URL");
+    const [url, apiKey] = [Cookies.get("API_KEY"), Cookies.get("URL")];
 
-    if (!apiKey) {
-      router.push("/");
-    }
-    if (!url) {
+    if (!apiKey || !url) {
       router.push("/");
     }
 
@@ -30,8 +26,7 @@ export default function DashboardPage({
   }, [router]);
 
   function fetchData() {
-    const url = Cookies.get("URL");
-    const apiKey = Cookies.get("API_KEY");
+    const [url, apiKey] = [Cookies.get("API_KEY"), Cookies.get("URL")];
 
     const urlToFetch = `${url}/Sessions`;
     axios
@@ -168,10 +163,12 @@ export default function DashboardPage({
             ["Location", element.RemoteEndPoint, true],
           ];
 
+          // set the playback progress bar to the correct value
           const playbackProgressStyle = {
             width: `${playbackProgress}%`,
           }
 
+          // set the transcoding progress bar to the correct value
           const transcodingProgressStyle = {
             width: `${transcodingProgress}%`,
           }
@@ -228,6 +225,7 @@ export default function DashboardPage({
                       {/* Display progress bar */}
                         <div className="bg-blue-600 h-5 bottom-0 left-0 z-10 absolute" style={playbackProgressStyle}></div>
 
+                        {/* Display transcoding progress bar */}
                         {transcodingProgress > 0 &&
                           <div className="bg-orange-600 h-5 absolute bottom-0 left-0 z-0" style={transcodingProgressStyle}></div>
                         }
