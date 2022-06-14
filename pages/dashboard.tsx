@@ -13,7 +13,7 @@ export default function DashboardPage({
   const router = useRouter();
 
   React.useEffect(() => {
-    const [url, apiKey] = [Cookies.get("API_KEY"), Cookies.get("URL")];
+    const [url, apiKey] = [Cookies.get("URL"), Cookies.get("API_KEY")];
 
     if (!apiKey || !url) {
       router.push("/");
@@ -26,7 +26,7 @@ export default function DashboardPage({
   }, [router]);
 
   function fetchData() {
-    const [url, apiKey] = [Cookies.get("API_KEY"), Cookies.get("URL")];
+    const [url, apiKey] = [Cookies.get("URL"), Cookies.get("API_KEY")];
 
     const urlToFetch = `${url}/Sessions`;
     axios
