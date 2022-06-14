@@ -135,7 +135,7 @@ export default function DashboardPage({
           }
           // Fallback
           else {
-            deviceImage = "/JellyfinDesktop.svg"
+            deviceImage = "/jellyfin.svg"
             deviceColour = "bg-gradient-to-br from-[#AA5CC3] to-[#00A4DC]"
           }
 
@@ -154,6 +154,19 @@ export default function DashboardPage({
           const moviePosterClass = `hidden sm:block overflow-hidden m-1.5 ${isTvChannel ? 'h-32 my-auto' : 'sm:w-52'}`
           const moviePosterImage = `${url}/Items/${itemId}/Images/Primary?tag=${itemId}`
           const moviePosterTitle = element.NowPlayingItem.Name
+
+          // Label, Value, Display State
+          const playbackProperties = [
+            ["Product", element.Client, true],
+            ["Player", element.DeviceName, true],
+            ["Client", element.ApplicationVersion, true],
+            ["Quality", (element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.DisplayTitle, true],
+            ["Stream", stream, true],
+            ["Audio", audio, true],
+            ["Video", video, true],
+            ["Bandwidth", bitrate, true],
+            ["Location", element.RemoteEndPoint, true],
+          ];
 
           const playbackProgressStyle = {
             width: `${playbackProgress}%`,
@@ -182,50 +195,16 @@ export default function DashboardPage({
                   </div>
 
                   <div className="p-2 flex flex-col gap-0.5 ml-4 sm:ml-8">
-                    <div className="flex gap-4">
-                      <span className="text-xs text-white/50 uppercase text-right my-auto w-20">Product</span>
-                      <span className="w-max">{element.Client}</span>
-                    </div>
-
-                    <div className="flex gap-4">
-                      <span className="text-xs text-white/50 uppercase text-right my-auto w-20">Player</span>
-                      <span>{element.DeviceName}</span>
-                    </div>
-
-                    <div className="flex gap-4">
-                      <span className="text-xs text-white/50 uppercase text-right my-auto w-20">Client</span>
-                      <span>{element.ApplicationVersion}</span>
-                    </div>
-
-                    <div className="flex gap-4">
-                      <span className="text-xs text-white/50 uppercase text-right my-auto w-20">Quality</span>
-                      <span>{(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.DisplayTitle}</span>
-                    </div>
-
-                    <div className="flex gap-4">
-                      <span className="text-xs text-white/50 uppercase text-right my-auto w-20">Stream</span>
-                      <span>{stream}</span>
-                    </div>
-
-                    <div className="flex gap-4">
-                      <span className="text-xs text-white/50 uppercase text-right my-auto w-20">Audio</span>
-                      <span>{audio}</span>
-                    </div>
-
-                    <div className="flex gap-4">
-                      <span className="text-xs text-white/50 uppercase text-right my-auto w-20">Video</span>
-                      <span>{video}</span>
-                    </div>
-
-                    <div className="flex gap-4">
-                      <span className="text-xs text-white/50 uppercase text-right my-auto w-20">Bandwidth</span>
-                      <span>{bitrate}</span>
-                    </div>
-
-                    <div className="flex gap-4">
-                      <span className="text-xs text-white/50 uppercase text-right my-auto w-20">Location</span>
-                      <span>{element.RemoteEndPoint}</span>
-                    </div>
+                    {playbackProperties?.map((element) => {
+                      if (element[2]) { // if display state is true
+                        return (
+                          <div className="flex gap-4">
+                            <span className="text-xs text-white/50 uppercase text-right my-auto w-20">{element[0]}</span> {/* Label */}
+                            <span className="w-max">{element[1]}</span> {/* Value */}
+                          </div>
+                        );
+                      }
+                    })}
 
                     <div className="flex items-center gap-4 mt-3">
                       <img className="w-10 h-10 rounded-full" src={avatar}/>
