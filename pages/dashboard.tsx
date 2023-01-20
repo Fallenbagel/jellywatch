@@ -113,6 +113,16 @@ export default function DashboardPage({
             deviceImage = `${url}/web/assets/img/devices/apple.svg`
             deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
           }
+          // Apple tvOS
+          else if (element.Client == "Jellyfin tvOS") {
+              deviceImage = `${url}/web/assets/img/devices/apple.svg`
+              deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
+          }
+          // FinAmp
+          else if (element.Client?.includes("FinAmp")) {
+              deviceImage = `${url}/web/assets/img/devices/finamp.svg`
+              deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
+          }
           // Samsung TV
           else if (element.DeviceName == "Samsung Smart TV" && (element.Client == "Jellyfin Web")) {
             deviceImage = `${url}/web/assets/img/devices/samsungtv.svg`
@@ -126,6 +136,11 @@ export default function DashboardPage({
           // Playstation
           else if (element.DeviceName?.includes("Sony PS")) {
             deviceImage = `${url}/web/assets/img/devices/playstation.svg`
+            deviceColour = "bg-gradient-to-br from-[#1C6FB5] to-[#052249]"
+          }
+          // Roku
+          else if (element.DeviceName?.includes("Roku")) {
+            deviceImage = `${url}/web/assets/img/devices/roku.svg`
             deviceColour = "bg-gradient-to-br from-[#1C6FB5] to-[#052249]"
           }
           // Fallback
