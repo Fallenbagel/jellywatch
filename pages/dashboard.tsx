@@ -144,7 +144,7 @@ export default function DashboardPage({
             deviceColour = "bg-gradient-to-br from-[#1C6FB5] to-[#052249]"
           }
           // Roku
-          else if (element.DeviceName?.includes("Roku")) {
+          else if (element.Client = "Jellyfin Roku") {
             deviceImage = `${url}/web/assets/img/devices/roku.svg`
             deviceColour = "bg-gradient-to-br from-[#2D1E39] to-[#732EA9]"
           }
