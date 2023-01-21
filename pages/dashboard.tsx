@@ -121,7 +121,7 @@ export default function DashboardPage({
           // Infuse
           else if (element.Client == "Infuse") {
               deviceImage = `https://static.firecore.com/images/infuse/infuse-icon_3x.png`
-              deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
+              deviceColour = "bg-gradient-to-br from-[#444444] to-[#000000]"
           }
           // FinAmp
           else if (element.Client == "Finamp") {
