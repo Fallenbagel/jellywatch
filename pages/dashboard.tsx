@@ -113,6 +113,21 @@ export default function DashboardPage({
             deviceImage = `${url}/web/assets/img/devices/apple.svg`
             deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
           }
+          // Apple tvOS
+          else if ((element.Client == "Jellyfin tvOS") || (element.Client == "Jellyfin iOS")) {
+              deviceImage = `${url}/web/assets/img/devices/apple.svg`
+              deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
+          }
+          // Infuse
+          else if (element.Client == "Infuse") {
+              deviceImage = `https://static.firecore.com/images/infuse/infuse-icon_3x.png`
+              deviceColour = "bg-gradient-to-br from-[#444444] to-[#000000]"
+          }
+          // FinAmp - 10.9 use: ${url}/web/assets/img/devices/finamp.svg
+          else if (element.Client == "Finamp") {
+              deviceImage = `https://raw.githubusercontent.com/jellyfin/jellyfin-web/69053a131f1c01b6ce018795ade07fd6adeddb08/src/assets/img/devices/finamp.svg`
+              deviceColour = "bg-gradient-to-br from-[#052249] to-[#AA5CC3]"
+          }
           // Samsung TV
           else if (element.DeviceName == "Samsung Smart TV" && (element.Client == "Jellyfin Web")) {
             deviceImage = `${url}/web/assets/img/devices/samsungtv.svg`
@@ -127,6 +142,11 @@ export default function DashboardPage({
           else if (element.DeviceName?.includes("Sony PS")) {
             deviceImage = `${url}/web/assets/img/devices/playstation.svg`
             deviceColour = "bg-gradient-to-br from-[#1C6FB5] to-[#052249]"
+          }
+          // Roku - 10.9 use: ${url}/web/assets/img/devices/roku.svg
+          else if (element.Client == "Jellyfin Roku") {
+            deviceImage = `https://raw.githubusercontent.com/jellyfin/jellyfin-web/69053a131f1c01b6ce018795ade07fd6adeddb08/src/assets/img/devices/roku.svg`
+            deviceColour = "bg-gradient-to-br from-[#2D1E39] to-[#732EA9]"
           }
           // Fallback
           else {
