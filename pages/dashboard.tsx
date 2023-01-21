@@ -119,9 +119,9 @@ export default function DashboardPage({
               deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
           }
           // FinAmp
-          else if (element.Client?.includes("FinAmp")) {
+          else if (element.Client == "Finamp") {
               deviceImage = `${url}/web/assets/img/devices/finamp.svg`
-              deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
+              deviceColour = "bg-gradient-to-br from-[#052249] to-[#AA5CC3]"
           }
           // Samsung TV
           else if (element.DeviceName == "Samsung Smart TV" && (element.Client == "Jellyfin Web")) {
@@ -141,7 +141,7 @@ export default function DashboardPage({
           // Roku
           else if (element.DeviceName?.includes("Roku")) {
             deviceImage = `${url}/web/assets/img/devices/roku.svg`
-            deviceColour = "bg-gradient-to-br from-[#1C6FB5] to-[#052249]"
+            deviceColour = "bg-gradient-to-br from-[#2D1E39] to-[#732EA9]"
           }
           // Fallback
           else {
