@@ -114,7 +114,7 @@ export default function DashboardPage({
             deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
           }
           // Apple tvOS
-          else if (element.Client == "Jellyfin tvOS") {
+          else if ((element.Client == "Jellyfin tvOS") || (element.Client == "Jellyfin iOS")) {
               deviceImage = `${url}/web/assets/img/devices/apple.svg`
               deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
           }
