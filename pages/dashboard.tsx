@@ -123,9 +123,9 @@ export default function DashboardPage({
               deviceImage = `https://static.firecore.com/images/infuse/infuse-icon_3x.png`
               deviceColour = "bg-gradient-to-br from-[#444444] to-[#000000]"
           }
-          // FinAmp
+          // FinAmp - 10.9 use: ${url}/web/assets/img/devices/finamp.svg
           else if (element.Client == "Finamp") {
-              deviceImage = `${url}/web/assets/img/devices/finamp.svg`
+              deviceImage = `https://raw.githubusercontent.com/jellyfin/jellyfin-web/69053a131f1c01b6ce018795ade07fd6adeddb08/src/assets/img/devices/finamp.svg`
               deviceColour = "bg-gradient-to-br from-[#052249] to-[#AA5CC3]"
           }
           // Samsung TV
@@ -143,9 +143,9 @@ export default function DashboardPage({
             deviceImage = `${url}/web/assets/img/devices/playstation.svg`
             deviceColour = "bg-gradient-to-br from-[#1C6FB5] to-[#052249]"
           }
-          // Roku
+          // Roku - 10.9 use: ${url}/web/assets/img/devices/roku.svg
           else if (element.Client == "Jellyfin Roku") {
-            deviceImage = `${url}/web/assets/img/devices/roku.svg`
+            deviceImage = `https://raw.githubusercontent.com/jellyfin/jellyfin-web/69053a131f1c01b6ce018795ade07fd6adeddb08/src/assets/img/devices/roku.svg`
             deviceColour = "bg-gradient-to-br from-[#2D1E39] to-[#732EA9]"
           }
           // Fallback
