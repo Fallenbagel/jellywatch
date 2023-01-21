@@ -118,6 +118,11 @@ export default function DashboardPage({
               deviceImage = `${url}/web/assets/img/devices/apple.svg`
               deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
           }
+          // Infuse
+          else if (element.Client == "Infuse") {
+              deviceImage = `https://static.firecore.com/images/infuse/infuse-icon_3x.png`
+              deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
+          }
           // FinAmp
           else if (element.Client == "Finamp") {
               deviceImage = `${url}/web/assets/img/devices/finamp.svg`
