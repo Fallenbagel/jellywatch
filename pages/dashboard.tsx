@@ -189,7 +189,6 @@ export default function DashboardPage({
         // Label, Value, Display State
         const playbackProperties = [
             ["Playing", element.NowPlayingItem.Name, true],
-            ["", "", true],
             ["Client", element.Client, true],
             ["Player", element.DeviceName, true],
             ["Client", element.ApplicationVersion, true],
