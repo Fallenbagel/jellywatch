@@ -133,10 +133,11 @@ export default function DashboardPage({
             deviceImage = `/devices/finamp.svg`
             deviceColour = "bg-gradient-to-br from-[#052249] to-[#AA5CC3]"
         }
-        // Infuse
+        // Infuse - TODO: Create SVG & Use Infuse Color Scheme
         else if (element.Client == "Infuse") {
-            deviceImage = `/devices/infuse.svg`
-            deviceColour = "bg-gradient-to-br from-[#EE2100] to-[#FE9800]"
+            deviceImage = `/devices/infuse.png`
+            deviceColour = "bg-gradient-to-br from-[#444444] to-[#000000]"
+            // deviceColour = "bg-gradient-to-br from-[#EE2100] to-[#FE9800]"
         }
         // Jellyfin Media Player
         else if (element.Client == "Jellyfin Media Player") {
