@@ -83,80 +83,89 @@ export default function DashboardPage({
         if (element.Client == "Jellyfin Web") {
             // Chrome
             if (element.DeviceName?.includes("Chrome")) {
-                deviceImage = `${url}/web/assets/img/devices/chrome.svg`
+                deviceImage = `/devices/chrome.svg`
                 deviceColour = "bg-gradient-to-br from-[#DD5144] to-[#991e13]"
             }
             // Edge
             else if (element.DeviceName?.includes("Edge")) {
-                deviceImage = `${url}/web/assets/img/devices/edgechromium.svg`
+                deviceImage = `/devices/edgechromium.svg`
                 deviceColour = "bg-gradient-to-br from-[#36c752] to-[#0882D8]"
+            }
+            // Firefox
+            else if (element.DeviceName?.includes("Firefox")) {
+                deviceImage = `/devices/firefox.svg`
+                deviceColour = "bg-gradient-to-br from-[#FF7F0C] to-[#D90B57]"
+            }
+            // Internet Explorer
+            else if (element.DeviceName?.includes("Internet Explorer")) {
+                deviceImage = `/devices/opera.svg`
+                deviceColour = "bg-gradient-to-br from-[#D0E0E3] to-[#2C68DC]"
             }
             // Opera
             else if (element.DeviceName?.includes("Opera")) {
-                deviceImage = `${url}/web/assets/img/devices/opera.svg`
+                deviceImage = `/devices/opera.svg`
                 deviceColour = "bg-gradient-to-br from-[#FF1B2D] to-[#A70014]"
             }
             // Safari
             else if (element.DeviceName?.includes("Safari")) {
-                deviceImage = `${url}/web/assets/img/devices/safari.svg`
-                deviceColour = "bg-gradient-to-br from-[#19D1FF] to-[#1853b2]"
-            }
-            // Firefox
-            else if (element.DeviceName?.includes("Firefox")) {
-                deviceImage = `${url}/web/assets/img/devices/firefox.svg`
-                deviceColour = "bg-gradient-to-br from-[#FF7F0C] to-[#D90B57]"
+                deviceImage = `/devices/safari.svg`
+                deviceColour = "bg-gradient-to-br from-[#19D1FF] to-[#1853B2]"
             }
             // Fallback
             else {
-                deviceImage = "/jellyfin.svg"
-                deviceColour = "bg-gradient-to-br from-[#AA5CC3] to-[#00A4DC]"
+                deviceImage = "/devices/html5.svg"
+                deviceColour = "bg-gradient-to-br from-[#C22620] to-[#E6A8A5]"
             }
         }
         // Android
         else if (element.Client.includes("Android")) {
-            deviceImage = `${url}/web/assets/img/devices/android.svg`
+            deviceImage = `/devices/android.svg`
             deviceColour = "bg-gradient-to-br from-[#B3E52A] to-[#4c7f11]"
         }
         // Apple iOS & Swiftfin
         else if ((element.Client == "Jellyfin Mobile (iOS)") || (element.Client == "Jellyfin tvOS") || (element.Client == "Jellyfin iOS")) {
             element.Client = "Jellyfin iOS"
-            deviceImage = `${url}/web/assets/img/devices/apple.svg`
+            deviceImage = `/devices/apple.svg`
             deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
         }
-        // Xbox
-        else if (element.DeviceName?.includes("Xbox")) {
-            deviceImage = `${url}/web/assets/img/devices/xbox.svg`
-            deviceColour = "bg-gradient-to-br from-[#107C10] to-[#033303]"
+        // FinAmp
+        else if (element.Client == "Finamp") {
+            deviceImage = `/devices/finamp.svg`
+            deviceColour = "bg-gradient-to-br from-[#052249] to-[#AA5CC3]"
+        }
+        // Infuse
+        else if (element.Client == "Infuse") {
+            deviceImage = `/devices/infuse.srv`
+            deviceColour = "bg-gradient-to-br from-[#444444] to-[#000000]"
+        }
+        // Infuse
+        else if (element.Client == "Jellyfin Media Player") {
+            deviceImage = `/devices/jellyfin.srv`
+            deviceColour = "bg-gradient-to-br from-[#444444] to-[#000000]"
+        }
+        // Kodi
+        else if (element.DeviceName?.includes("Kodi")) {
+            deviceImage = `/devices/kodi.srv`
+            deviceColour = "bg-gradient-to-br from-[#99CC99] to-[#008000]"
         }
         // Playstation
         else if (element.DeviceName?.includes("Sony PS")) {
-            deviceImage = `${url}/web/assets/img/devices/playstation.svg`
+            deviceImage = `/devices/playstation.svg`
             deviceColour = "bg-gradient-to-br from-[#1C6FB5] to-[#052249]"
         }
-
-        // TODO - 10.9 Update Icons to Use Jellyfin-Web
-
-        // FinAmp - 10.9 use: ${url}/web/assets/img/devices/finamp.svg
-        else if (element.Client == "Finamp") {
-            deviceImage = `https://raw.githubusercontent.com/jellyfin/jellyfin-web/69053a131f1c01b6ce018795ade07fd6adeddb08/src/assets/img/devices/finamp.svg`
-            deviceColour = "bg-gradient-to-br from-[#052249] to-[#AA5CC3]"
-        }
-        // Roku - 10.9 use: ${url}/web/assets/img/devices/roku.svg
+        // Roku
         else if (element.Client == "Jellyfin Roku") {
-            deviceImage = `https://raw.githubusercontent.com/jellyfin/jellyfin-web/69053a131f1c01b6ce018795ade07fd6adeddb08/src/assets/img/devices/roku.svg`
+            deviceImage = `/devices/roku.svg`
             deviceColour = "bg-gradient-to-br from-[#2D1E39] to-[#732EA9]"
         }
-
-        // No Icons Stored in Jellyfin-Web
-
-        // Infuse
-        else if (element.Client == "Infuse") {
-            deviceImage = `https://static.firecore.com/images/infuse/infuse-icon_3x.png`
-            deviceColour = "bg-gradient-to-br from-[#444444] to-[#000000]"
+        // Xbox
+        else if (element.DeviceName?.includes("Xbox")) {
+            deviceImage = `/devices/xbox.svg`
+            deviceColour = "bg-gradient-to-br from-[#107C10] to-[#033303]"
         }
         // Fallback
         else {
-            deviceImage = "/jellyfin.svg"
+            deviceImage = "/devices/other.svg"
             deviceColour = "bg-gradient-to-br from-[#AA5CC3] to-[#00A4DC]"
         }
 
@@ -179,6 +188,7 @@ export default function DashboardPage({
         // Label, Value, Display State
         const playbackProperties = [
             ["Playing", element.NowPlayingItem.Name, true],
+            ["", "", true]
             ["Client", element.Client, true],
             ["Player", element.DeviceName, true],
             ["Client", element.ApplicationVersion, true],
