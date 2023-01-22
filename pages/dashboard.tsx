@@ -145,7 +145,7 @@ export default function DashboardPage({
             deviceColour = "bg-gradient-to-br from-[#444444] to-[#000000]"
         }
         // Kodi
-        else if (element.DeviceName?.includes("Kodi")) {
+        else if (element.Client?.includes("Kodi")) {
             deviceImage = `/devices/kodi.svg`
             deviceColour = "bg-gradient-to-br from-[#99CC99] to-[#008000]"
         }
