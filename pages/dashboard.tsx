@@ -135,17 +135,17 @@ export default function DashboardPage({
         }
         // Infuse
         else if (element.Client == "Infuse") {
-            deviceImage = `/devices/infuse.srv`
+            deviceImage = `/devices/infuse.svg`
             deviceColour = "bg-gradient-to-br from-[#444444] to-[#000000]"
         }
         // Infuse
         else if (element.Client == "Jellyfin Media Player") {
-            deviceImage = `/devices/jellyfin.srv`
+            deviceImage = `/devices/jellyfin.svg`
             deviceColour = "bg-gradient-to-br from-[#444444] to-[#000000]"
         }
         // Kodi
         else if (element.DeviceName?.includes("Kodi")) {
-            deviceImage = `/devices/kodi.srv`
+            deviceImage = `/devices/kodi.svg`
             deviceColour = "bg-gradient-to-br from-[#99CC99] to-[#008000]"
         }
         // Playstation
