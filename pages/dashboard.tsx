@@ -136,9 +136,9 @@ export default function DashboardPage({
         // Infuse
         else if (element.Client == "Infuse") {
             deviceImage = `/devices/infuse.svg`
-            deviceColour = "bg-gradient-to-br from-[#444444] to-[#000000]"
+            deviceColour = "bg-gradient-to-br from-[#EE2100] to-[#FE9800]"
         }
-        // Infuse
+        // Jellyfin Media Player
         else if (element.Client == "Jellyfin Media Player") {
             deviceImage = `/devices/jellyfin.svg`
             deviceColour = "bg-gradient-to-br from-[#444444] to-[#000000]"
