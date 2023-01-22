@@ -58,121 +58,128 @@ export default function DashboardPage({
         </button>
       </div>
       <div className="grid gap-4 lg:grid-cols-2 2xl:grid-cols-3 p-4">
-        {data?.map((element, index) => {
-          // Programming logic
-          if (!element.NowPlayingItem) {
+        { data?.map((element, index) => {
+        // Programming logic
+        if (!element.NowPlayingItem) {
             return null;
-          }
-          const userId = element.UserId;
-          const url = Cookies.get("URL")
-          const itemId = element.NowPlayingItem.Type === "Episode" ? element.NowPlayingItem.SeriesId : element.NowPlayingItem.Id;
-          const isTvChannel = element.NowPlayingItem.Type === "TvChannel" ? true : false;
-          const avatar = element.UserPrimaryImageTag ? `${url}/Users/${userId}/Images/Primary/?tag=${element.UserPrimaryImageTag}&quality=90` : "/avatar.png";
-          const stream = element.TranscodingInfo ? "Transcode" : "Direct Play"
-          const audio = element.TranscodingInfo ? `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Audio"))?.Codec} -> ${element.TranscodingInfo.AudioCodec})` : `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Audio"))?.Codec})`
-          const video = element.TranscodingInfo ? `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.Codec} -> ${element.TranscodingInfo.VideoCodec})` : `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.Codec})`
-          const playbackProgress = element.PlayState.PositionTicks && !isTvChannel ? element.PlayState.PositionTicks / element.NowPlayingItem.RunTimeTicks * 100 : 0
-          const transcodingProgress = element.TranscodingInfo ? Math.floor(element.TranscodingInfo.CompletionPercentage) : -1
-          const playState = element.PlayState.IsPaused ? "Paused" : "Playing"
-          const bitrate_full = element.TranscodingInfo ? element.TranscodingInfo.Bitrate : (element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.BitRate
+        }
+        const userId = element.UserId;
+        const url = Cookies.get("URL")
+        const itemId = element.NowPlayingItem.Type === "Episode" ? element.NowPlayingItem.SeriesId : element.NowPlayingItem.Id;
+        const isTvChannel = element.NowPlayingItem.Type === "TvChannel" ? true : false;
+        const avatar = element.UserPrimaryImageTag ? `${url}/Users/${userId}/Images/Primary/?tag=${element.UserPrimaryImageTag}&quality=90` : "/avatar.png";
+        const stream = element.TranscodingInfo ? "Transcode" : "Direct Play"
+        const audio = element.TranscodingInfo ? `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Audio"))?.Codec} -> ${element.TranscodingInfo.AudioCodec})` : `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Audio"))?.Codec})`
+        const video = element.TranscodingInfo ? `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.Codec} -> ${element.TranscodingInfo.VideoCodec})` : `${stream} (${(element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.Codec})`
+        const playbackProgress = element.PlayState.PositionTicks && !isTvChannel ? element.PlayState.PositionTicks / element.NowPlayingItem.RunTimeTicks * 100 : 0
+        const transcodingProgress = element.TranscodingInfo ? Math.floor(element.TranscodingInfo.CompletionPercentage) : -1
+        const playState = element.PlayState.IsPaused ? "Paused" : "Playing"
+        const bitrate_full = element.TranscodingInfo ? element.TranscodingInfo.Bitrate : (element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.BitRate
 
-          let deviceImage = null
-          let deviceColour = null
-          // Chrome
-          if ((element.DeviceName?.includes("Chrome")) && (element.Client == "Jellyfin Web")) {
-            deviceImage = `${url}/web/assets/img/devices/chrome.svg`
-            deviceColour = "bg-gradient-to-br from-[#DD5144] to-[#991e13]"
-          }
-          // Edge
-          else if ((element.DeviceName?.includes("Edge")) && (element.Client == "Jellyfin Web")) {
-            deviceImage = `${url}/web/assets/img/devices/edgechromium.svg`
-            deviceColour = "bg-gradient-to-br from-[#36c752] to-[#0882D8]"
-          }
-          // Opera
-          else if ((element.DeviceName == "Opera") && (element.Client == "Jellyfin Web")) {
-            deviceImage = `${url}/web/assets/img/devices/opera.svg`
-            deviceColour = "bg-gradient-to-br from-[#FF1B2D] to-[#A70014]"
-          }
-          // Safari
-          else if ((element.DeviceName?.includes("Safari")) && (element.Client == "Jellyfin Web")) {
-            deviceImage = `${url}/web/assets/img/devices/safari.svg`
-            deviceColour = "bg-gradient-to-br from-[#19D1FF] to-[#1853b2]"
-          }
-          // Firefox
-          else if ((element.DeviceName == "Firefox") && (element.Client == "Jellyfin Web")) {
-            deviceImage = `${url}/web/assets/img/devices/firefox.svg`
-            deviceColour = "bg-gradient-to-br from-[#FF7F0C] to-[#D90B57]"
-          }
-          // Android TV
-          else if ((element.Client.includes("Android"))) {
+        let deviceImage = null
+        let deviceColour = null
+
+        // Jellyfin Web
+        if (element.Client == "Jellyfin Web") {
+            // Chrome
+            if (element.DeviceName?.includes("Chrome")) {
+                deviceImage = `${url}/web/assets/img/devices/chrome.svg`
+                deviceColour = "bg-gradient-to-br from-[#DD5144] to-[#991e13]"
+            }
+            // Edge
+            else if (element.DeviceName?.includes("Edge")) {
+                deviceImage = `${url}/web/assets/img/devices/edgechromium.svg`
+                deviceColour = "bg-gradient-to-br from-[#36c752] to-[#0882D8]"
+            }
+            // Opera
+            else if (element.DeviceName?.includes("Opera")) {
+                deviceImage = `${url}/web/assets/img/devices/opera.svg`
+                deviceColour = "bg-gradient-to-br from-[#FF1B2D] to-[#A70014]"
+            }
+            // Safari
+            else if (element.DeviceName?.includes("Safari")) {
+                deviceImage = `${url}/web/assets/img/devices/safari.svg`
+                deviceColour = "bg-gradient-to-br from-[#19D1FF] to-[#1853b2]"
+            }
+            // Firefox
+            else if (element.DeviceName?.includes("Firefox")) {
+                deviceImage = `${url}/web/assets/img/devices/firefox.svg`
+                deviceColour = "bg-gradient-to-br from-[#FF7F0C] to-[#D90B57]"
+            }
+            // Fallback
+            else {
+                deviceImage = "/jellyfin.svg"
+                deviceColour = "bg-gradient-to-br from-[#AA5CC3] to-[#00A4DC]"
+            }
+        }
+        // Android
+        else if (element.Client.includes("Android")) {
             deviceImage = `${url}/web/assets/img/devices/android.svg`
             deviceColour = "bg-gradient-to-br from-[#B3E52A] to-[#4c7f11]"
-          }
-          // Apple iOS
-          else if (element.Client == "Jellyfin Mobile (iOS)") {
+        }
+        // Apple iOS & Swiftfin
+        else if ((element.Client == "Jellyfin Mobile (iOS)") || (element.Client == "Jellyfin tvOS") || (element.Client == "Jellyfin iOS")) {
+            element.Client = "Jellyfin iOS"
             deviceImage = `${url}/web/assets/img/devices/apple.svg`
             deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
-          }
-          // Apple tvOS
-          else if (element.Client == "Jellyfin tvOS") {
-              deviceImage = `${url}/web/assets/img/devices/apple.svg`
-              deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
-          }
-          // Infuse
-          else if (element.Client == "Infuse") {
-              deviceImage = `https://static.firecore.com/images/infuse/infuse-icon_3x.png`
-              deviceColour = "bg-gradient-to-br from-[#444444] to-[#000000]"
-          }
-          // FinAmp
-          else if (element.Client == "Finamp") {
-              deviceImage = `${url}/web/assets/img/devices/finamp.svg`
-              deviceColour = "bg-gradient-to-br from-[#052249] to-[#AA5CC3]"
-          }
-          // Samsung TV
-          else if (element.DeviceName == "Samsung Smart TV" && (element.Client == "Jellyfin Web")) {
-            deviceImage = `${url}/web/assets/img/devices/samsungtv.svg`
-            deviceColour = "bg-gradient-to-br from-[#0193DE] to-[#1528A0]"
-          }
-          // Xbox
-          else if (element.DeviceName?.includes("Xbox")) {
+        }
+        // Xbox
+        else if (element.DeviceName?.includes("Xbox")) {
             deviceImage = `${url}/web/assets/img/devices/xbox.svg`
             deviceColour = "bg-gradient-to-br from-[#107C10] to-[#033303]"
-          }
-          // Playstation
-          else if (element.DeviceName?.includes("Sony PS")) {
+        }
+        // Playstation
+        else if (element.DeviceName?.includes("Sony PS")) {
             deviceImage = `${url}/web/assets/img/devices/playstation.svg`
             deviceColour = "bg-gradient-to-br from-[#1C6FB5] to-[#052249]"
-          }
-          // Roku
-          else if (element.DeviceName?.includes("Roku")) {
-            deviceImage = `${url}/web/assets/img/devices/roku.svg`
+        }
+
+        // TODO - 10.9 Update Icons to Use Jellyfin-Web
+
+        // FinAmp - 10.9 use: ${url}/web/assets/img/devices/finamp.svg
+        else if (element.Client == "Finamp") {
+            deviceImage = `https://raw.githubusercontent.com/jellyfin/jellyfin-web/69053a131f1c01b6ce018795ade07fd6adeddb08/src/assets/img/devices/finamp.svg`
+            deviceColour = "bg-gradient-to-br from-[#052249] to-[#AA5CC3]"
+        }
+        // Roku - 10.9 use: ${url}/web/assets/img/devices/roku.svg
+        else if (element.Client == "Jellyfin Roku") {
+            deviceImage = `https://raw.githubusercontent.com/jellyfin/jellyfin-web/69053a131f1c01b6ce018795ade07fd6adeddb08/src/assets/img/devices/roku.svg`
             deviceColour = "bg-gradient-to-br from-[#2D1E39] to-[#732EA9]"
-          }
-          // Fallback
-          else {
+        }
+
+        // No Icons Stored in Jellyfin-Web
+
+        // Infuse
+        else if (element.Client == "Infuse") {
+            deviceImage = `https://static.firecore.com/images/infuse/infuse-icon_3x.png`
+            deviceColour = "bg-gradient-to-br from-[#444444] to-[#000000]"
+        }
+        // Fallback
+        else {
             deviceImage = "/jellyfin.svg"
             deviceColour = "bg-gradient-to-br from-[#AA5CC3] to-[#00A4DC]"
-          }
+        }
 
-          // check if bitrate is Kbps or Mbps if it is Kbps set it to Kbps if its Mbps set it to Mbps
-          let bitrate = ""
-          if (bitrate_full && bitrate_full > 1000000 ) bitrate = `${(bitrate_full / 1000000).toFixed(2)} Mbps`
-          if (bitrate_full && bitrate_full < 1000000 ) bitrate = `${(bitrate_full / 1000).toFixed(2)} Kbps`
+        // check if bitrate is Kbps or Mbps if it is Kbps set it to Kbps if its Mbps set it to Mbps
+        let bitrate = ""
+        if (bitrate_full && bitrate_full > 1000000) bitrate = `${(bitrate_full / 1000000).toFixed(2)} Mbps`
+        if (bitrate_full && bitrate_full < 1000000) bitrate = `${(bitrate_full / 1000).toFixed(2)} Kbps`
 
-          // UI logic
-          const movieBackdropStyle = {
+        // UI logic
+        const movieBackdropStyle = {
             backgroundImage: `url(${url}/Items/${itemId}/Images/Backdrop/0?tag=${itemId})`,
             backgroundPosition: "center",
             backgroundSize: "cover",
-          }
+        }
 
-          const moviePosterClass = `hidden sm:block overflow-hidden m-1.5 ${isTvChannel ? 'h-32 my-auto' : 'sm:w-52'}`
-          const moviePosterImage = `${url}/Items/${itemId}/Images/Primary?tag=${itemId}`
-          const moviePosterTitle = element.NowPlayingItem.Name
+        const moviePosterClass = `hidden sm:block overflow-hidden m-1.5 ${isTvChannel ? 'h-32 my-auto' : 'sm:w-52'}`
+        const moviePosterImage = `${url}/Items/${itemId}/Images/Primary?tag=${itemId}`
+        const moviePosterTitle = element.NowPlayingItem.Name
 
-          // Label, Value, Display State
-          const playbackProperties = [
-            ["Product", element.Client, true],
+        // Label, Value, Display State
+        const playbackProperties = [
+            ["Playing", element.NowPlayingItem.Name, true],
+            ["Client", element.Client, true],
             ["Player", element.DeviceName, true],
             ["Client", element.ApplicationVersion, true],
             ["Quality", (element.NowPlayingItem.MediaStreams.find(s => s.Type === "Video"))?.DisplayTitle, true],
