@@ -7,7 +7,7 @@ RUN mkdir /app
 
 WORKDIR /app
 
-RUN git clone https://github.com/Jpkribs/jellywatch.git
+RUN git clone https://github.com/Fallenbagel/jellywatch.git
 
 WORKDIR /app/jellywatch
 
