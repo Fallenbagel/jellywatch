@@ -98,7 +98,7 @@ export default function DashboardPage({
             }
             // Internet Explorer
             else if (element.DeviceName?.includes("Internet Explorer")) {
-                deviceImage = `/devices/opera.svg`
+                deviceImage = `/devices/msie.svg`
                 deviceColour = "bg-gradient-to-br from-[#D0E0E3] to-[#2C68DC]"
             }
             // Opera
