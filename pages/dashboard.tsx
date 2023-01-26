@@ -124,7 +124,6 @@ export default function DashboardPage({
         }
         // Apple iOS & Swiftfin
         else if ((element.Client == "Jellyfin Mobile (iOS)") || (element.Client == "Jellyfin tvOS") || (element.Client == "Jellyfin iOS")) {
-            element.Client = "Jellyfin iOS"
             deviceImage = `/devices/apple.svg`
             deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
         }
