@@ -1,8 +1,12 @@
 {
   "ExpandedNodes": [
     "",
+    "\\.idea",
     "\\pages",
-    "\\pages\\user"
+    "\\pages\\user",
+    "\\public",
+    "\\public\\devices"
   ],
+  "SelectedNode": "\\pages\\dashboard.tsx",
   "PreviewInSolutionExplorer": false
 }

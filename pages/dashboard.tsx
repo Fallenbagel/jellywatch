@@ -147,7 +147,7 @@ export default function DashboardPage({
         // Kodi
         else if (element.Client?.includes("Kodi")) {
             deviceImage = `/devices/kodi.svg`
-            deviceColour = "bg-gradient-to-br from-[#38bde8] to-[#000000]"
+            deviceColour = "bg-gradient-to-br from-[#38bde8] to-[#0c638b]"
         }
         // Playstation
         else if (element.DeviceName?.includes("Sony PS")) {
