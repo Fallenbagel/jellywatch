@@ -123,7 +123,7 @@ export default function DashboardPage({
             deviceColour = "bg-gradient-to-br from-[#B3E52A] to-[#4c7f11]"
         }
         // Apple iOS & Swiftfin
-        else if ((element.Client == "Jellyfin Mobile (iOS)") || (element.Client == "Jellyfin tvOS") || (element.Client == "Jellyfin iOS")) {
+        else if ((element.Client == "Jellyfin Mobile (iOS)") || (element.Client == "Jellyfin Mobile (iPadOS)") || (element.Client == "Jellyfin tvOS") || (element.Client == "Jellyfin iOS")) {
             element.Client = "Jellyfin iOS"
             deviceImage = `/devices/apple.svg`
             deviceColour = "bg-gradient-to-br from-[#A7A7A7] to-[#4F4F4F]"
@@ -147,7 +147,7 @@ export default function DashboardPage({
         // Kodi
         else if (element.Client?.includes("Kodi")) {
             deviceImage = `/devices/kodi.svg`
-            deviceColour = "bg-gradient-to-br from-[#99CC99] to-[#008000]"
+            deviceColour = "bg-gradient-to-br from-[#38bde8] to-[#000000]"
         }
         // Playstation
         else if (element.DeviceName?.includes("Sony PS")) {
@@ -189,7 +189,6 @@ export default function DashboardPage({
         // Label, Value, Display State
         const playbackProperties = [
             ["Playing", element.NowPlayingItem.Name, true],
-            ["", "", true],
             ["Client", element.Client, true],
             ["Player", element.DeviceName, true],
             ["Client", element.ApplicationVersion, true],
