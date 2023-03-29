@@ -118,7 +118,7 @@ export default function DashboardPage({
             }
         }
         // Android
-        else if (element.Client.includes("Android")) {
+        else if (element.Client.includes("Android") || element.Client == "Findroid") {
             deviceImage = `/devices/android.svg`
             deviceColour = "bg-gradient-to-br from-[#B3E52A] to-[#4c7f11]"
         }
